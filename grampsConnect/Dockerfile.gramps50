@@ -1,0 +1,25 @@
+FROM debian
+
+#Tools
+#       sudo apt-get update
+#       sudo apt-get install git
+#       sudo apt-get install intltool
+#       sudo apt-get install python3-pip
+#       sudo apt-get install python3-bsddb3
+RUN apt-get -y update && apt-get install -y python3 python3-pip python3-bsddb3 intltool git python3-gi
+
+#Gramps
+RUN git clone --depth 1 https://github.com/gramps-project/gramps.git
+RUN cd gramps/ && python3 setup.py build
+#       sudo python3 setup.py install
+RUN cd gramps/ && python3 setup.py install
+
+#Gramps Database Backends
+#RUN cd
+RUN mkdir .gramps
+#RUN cd .gramps
+RUN mkdir .gramps/gramps50
+RUN cd .gramps/gramps50 && git clone --depth 1 https://github.com/gramps-project/addons-source.git
+RUN cd .gramps/gramps50 && mv addons-source plugins
+RUN cd .gramps/gramps50 && rm -rf ~/.gramps/gramps50/plugins/*Pack
+RUN cd .gramps/gramps50 && rm -rf ~/.gramps/gramps50/plugins/libwebconnect

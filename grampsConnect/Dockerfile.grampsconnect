@@ -1,0 +1,13 @@
+FROM gramps50
+RUN apt-get -y update && apt-get install -y python3-pil python3-icu
+#Sample Database
+RUN cd ~ && ln -s /.gramps
+RUN gramps --config behavior.database-backend:dbapi -C "Gramps Connect" -i /gramps/example/gramps/example.gramps 
+
+#Gramps Connect
+# Requires editing of the security group to add InBound HTTP
+RUN git clone --depth 1 https://github.com/gramps-project/gramps_connect.git
+#RUN cd gramps_connect/
+RUN cd gramps_connect/ && pip3 install tornado
+#RUN cd gramps_connect/ && PYTHONPATH=. python3 gramps_connect/app.py --database='Gramps Connect' --port=8085
+EXPOSE 8085

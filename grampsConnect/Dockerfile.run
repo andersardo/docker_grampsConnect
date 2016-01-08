@@ -1,0 +1,3 @@
+FROM grampsconnect
+EXPOSE 8085
+RUN cd gramps_connect/ && PYTHONPATH=. python3 gramps_connect/app.py --database='Gramps Connect' --port=8085

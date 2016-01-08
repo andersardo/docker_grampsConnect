@@ -1,0 +1,24 @@
+#Build Gramps Connect in a Docker container
+#HomePage: https://www.docker.com/
+#Docs: https://docs.docker.com/
+#Docker Cheat Sheet: https://github.com/wsargent/docker-cheat-sheet
+
+#Build container - uses Dockerfile
+docker build -t grampsconnect .
+
+#start Gramps Connect
+docker run -P -d grampsconnect
+
+#Access Gramps Connect URL (same machine as it is running on)
+http://172.17.0.2:8085/
+Login as demo/demo
+
+#stop Gramps Connect (actually stops all running docker containers)
+docker kill $(docker ps -q)
+
+#cleanup
+#Delete stopped containers
+docker rm -v `docker ps -a -q -f status=exited`
+
+#Delete dangling images
+docker rmi $(docker images -q -f dangling=true)
