@@ -16,6 +16,9 @@ Login as demo/demo
 #stop Gramps Connect (actually stops all running docker containers)
 docker kill $(docker ps -q)
 
+#Override entrypoint and start a /bin/bash instead
+docker run -it --entrypoint=/bin/bash grampsconnect 
+
 #cleanup
 #Delete stopped containers
 docker rm -v `docker ps -a -q -f status=exited`
