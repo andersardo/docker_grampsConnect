@@ -39,7 +39,7 @@ cleanup
 
 - Delete stopped containers
 
-      docker rm -v `docker ps -a -q -f status=exited`
+      `docker rm -v `docker ps -a -q -f status=exited``
 
 - Delete dangling images
 
