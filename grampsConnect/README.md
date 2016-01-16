@@ -6,10 +6,15 @@
 #Build container - uses Dockerfile
 docker build -t grampsconnect .
 
-#start Gramps Connect
+#start Gramps Connect - returns containername
 docker run -P -d grampsconnect
 
+#Find out which IP the container <containername> is using
+#On my machine it's usually 172.17.0.2
+docker inspect -f '{{ .NetworkSettings.IPAddress }}' <containername>
+
 #Access Gramps Connect URL (same machine as it is running on)
+#see below for access from another machine
 http://172.17.0.2:8085/
 Login as demo/demo
 
