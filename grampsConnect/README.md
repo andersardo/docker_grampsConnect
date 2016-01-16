@@ -6,17 +6,17 @@ Docker Cheat Sheet: https://github.com/wsargent/docker-cheat-sheet
 
 - Build container - uses Dockerfile
 
-    docker build -t grampsconnect .
+      docker build -t grampsconnect .
 
 - start Gramps Connect - returns containername
 
-    docker run -P -d grampsconnect
+      docker run -P -d grampsconnect
 
 - Find out which IP the container <containername> is using
 
 On my machine it's usually 172.17.0.2
 
-     docker inspect -f '{{ .NetworkSettings.IPAddress }}' <containername>
+       docker inspect -f '{{ .NetworkSettings.IPAddress }}' <containername>
 
 - Access Gramps Connect URL (same machine as it is running on)
 
@@ -28,22 +28,22 @@ Login as demo/demo
 
 - stop Gramps Connect (actually stops all running docker containers)
 
-    docker kill $(docker ps -q)
+      docker kill $(docker ps -q)
 
 - Override entrypoint and start a /bin/bash instead
 
-    docker run -it --entrypoint=/bin/bash grampsconnect 
+      docker run -it --entrypoint=/bin/bash grampsconnect 
 
 cleanup
 -------
 
 - Delete stopped containers
 
-    docker rm -v `docker ps -a -q -f status=exited`
+      docker rm -v `docker ps -a -q -f status=exited`
 
 - Delete dangling images
 
-    docker rmi $(docker images -q -f dangling=true)
+      docker rmi $(docker images -q -f dangling=true)
 
 - Access running container from another machine on the same network
 
