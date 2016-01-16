@@ -25,3 +25,8 @@ docker rm -v `docker ps -a -q -f status=exited`
 
 #Delete dangling images
 docker rmi $(docker images -q -f dangling=true)
+
+#Access running container from another machine on the same network
+#There are probably better/safer/simpler ways to do this but it works for me
+#assuming that the container is running on host <docker-host-ip>
+sudo route add 172.17.0.2 gw <docker-host-ip>
